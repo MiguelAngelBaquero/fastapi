@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - DATABASE_HOST=localhost
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=my_collections
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  volumes:
+    pgdata:
