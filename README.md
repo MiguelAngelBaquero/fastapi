@@ -1,16 +1,18 @@
 # Movies FastAPI
 
-Simple API using FastAPI, Python and PostgreSQL
+Building a simple API with FastAPI and PostgreSQL for Movies.
 
-FastAPI is a web framework for building APIs with Python. In this project I built an API with **CRUD** operations and high performance.
+FastAPI is a web framework for building APIs with Python. In this project I built an API with **CRUD** (Create, Read, Update, Delete) operations and high performance.
+
+This project is appropriate for beginners or experienced developers.
 
 ## Before you begin
 
-Make sure you've previouslly installed Python on your OS, this API uses Python 3.12.
+Make sure you've previously installed Python on your OS, this API has Python 3.x compatibility.
 
-If you want to deploy the application once you're done building it, the common aproach is to build a Linux container image using Docker. Also, you can run PostgreSQL from a container, so installing Docker is highly recommended.
+If you want to deploy the application once you're done building it, the common approach is to build a Linux container image using Docker. Also, you can run PostgreSQL from a container, so installing Docker is highly recommended.
 
-At last but not least, is a good idea to install both database and API clients, such as PgAdmin and ThunderClient for VSCode.
+At last but not least, is a good idea to install both database and API clients, such as PgAdmin and ThunderClient.
 
 ## Libraries
 
@@ -55,7 +57,7 @@ The final result should look like the following structure:
 
 ## Database container
 
-A `docker-compose.yml` file is provided in this project in case that you desire to run the database from a Docker container.
+A `docker-compose.yml` file is provided in this project in case that you want to run the database from a Docker container.
 
 ```bash
 ╰─ docker-compose up
@@ -65,7 +67,9 @@ Building the database container with **docker compose** is completely optional. 
 
 ## Dev Environment
 
-To set up the dev environment, follow the next stepts:
+We are taking advantage of the features of Uvicorn, which is a a ASGI web server and it's helpful to test the app before any deployment.
+
+To configure the dev environment, follow the next steps:
 
 1. Install virtual environment and web server dependencies:
 
@@ -74,7 +78,7 @@ pip install virtualenv
 pip install uvicorn
 ```
 
-2. Generete a new virtual environment:
+2. Generate a new virtual environment:
 
 ```bash
 ╰─ Unix/macOS:
@@ -107,7 +111,9 @@ cd app
 uvicorn main:app --reload
 ```
 
-## Build the Docker image
+## Deployment
+
+### Build the Docker image
 
 Once you finish your API, you can build a Docker image to deploy your app.
 
@@ -132,16 +138,17 @@ Run a container based on your image:
 You should be able to check it in your Docker container's URL, for example:
 
 - http://192.168.99.100/docs
+- localhost/docs
 
 ![App's home - container](./images/AppHomeContainer.png)
 
 ### Container's IP address
 
-If you have both your app and dabase containers running on the same machine, then you need to get the real IP address from the database container. This is due to the default network mode on Docker, **bridge**.
+If you are running both your app and dabase containers on the same machine, then you need to get the real IP address from the database container. This is due to the default network mode on Docker, **bridge**.
 
 Once you've gotten the IP addres, set it up in `database.py`.
 
-If you are running tests on your local machine while using web servers like **Uvicorn**, switch the IP address back to `localhost` in `database.py`.
+If you are running tests on your local machine while using a web server like **Uvicorn**, switch the IP address back to `localhost` in `database.py`.
 
 ```bash
 ╰─ docker ps
@@ -221,6 +228,10 @@ a80117d31c68   postgres   "docker-entrypoint.s…"   3 weeks ago   Up 16 seconds
 ```
 
 ### Database Model
+
+SqlAlchemy has a feature where you can add a single table model or a completely complex database model.
+
+Check the `models.py` file to see more details about this project's database model.
 
 ![Db Model](./images/DbModel.png)
 
