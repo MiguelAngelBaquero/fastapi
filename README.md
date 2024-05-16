@@ -20,7 +20,7 @@ At last but not least, is a good idea to install both database and API clients, 
 
 ## Setting up the project structure
 
-Is important to create a new directory called `app/`. In this path you can put all files realted to the API.
+Create a new directory called `app/`. In this path you can put all files realted to the API.
 
 The `main.py` file is the starting point to import libraries, modules and different utilities. You can name your modules whatever you feel like and remember to create an `__init.py__` file everytime you generate a new directory inside the `app/` path.
 
@@ -57,17 +57,63 @@ The final result should look like the following structure:
 
 A `docker-compose.yml` file is provided in this project in case that you desire to run the database from a Docker container.
 
-```
+```bash
 ╰─ docker-compose up
 ```
 
 Building the database container with **docker compose** is completely optional. If you already have a local machine or a cloud service running PostgreSQL, then you can definitely reuse it. Just keep in mind that you require your database IP address.
 
+## Dev Environment
+
+To set up the dev environment, follow the next stepts:
+
+1. Install virtual environment dependencies:
+
+```bash
+pip install virtualenv
+pip install uvicorn
+```
+
+2. Generete a new virtual environment:
+
+```bash
+╰─ Unix/macOS:
+python3 -m venv .venv
+
+╰─ Windows
+py -m venv .venv
+```
+
+3. Activate the virtual environment
+
+```bash
+╰─ Unix/macOS:
+source .venv/bin/activate
+
+╰─ Windows
+.venv\Scripts\activate
+```
+
+4. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Initiate Uvicorn
+
+```bash
+cd app
+uvicorn main:app --reload
+```
+
 ## Build the Docker image
+
+Once you finish your API, you can build a Docker image to deploy your app.
 
 Go to the project directory in where your Dockerfile is and type:
 
-```
+```bash
 ╰─ docker build -t myimage .
 ```
 
@@ -75,7 +121,7 @@ Go to the project directory in where your Dockerfile is and type:
 
 Run a container based on your image:
 
-```
+```bash
 ╰─ docker run -d --name mycontainer -p 80:80 myimage
 ```
 
@@ -97,7 +143,7 @@ Once you've gotten the IP addres, set it up in `database.py`.
 
 If you are running tests on your local machine while using web servers like **Uvicorn**, switch the IP address back to `localhost` in `database.py`.
 
-```
+```bash
 ╰─ docker ps
 
 CONTAINER ID   IMAGE      COMMAND                  CREATED       STATUS          PORTS                    NAMES
