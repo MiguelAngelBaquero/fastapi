@@ -67,7 +67,7 @@ Building the database container with **docker compose** is completely optional. 
 
 To set up the dev environment, follow the next stepts:
 
-1. Install virtual environment dependencies:
+1. Install virtual environment and web server dependencies:
 
 ```bash
 pip install virtualenv
